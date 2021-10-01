@@ -21,7 +21,7 @@ function checkCurrent(page: string) {
 const navigation = [
   {
     name: 'Dashboard',
-    href: '/',
+    href: '/dashboard',
     icon: HomeIcon,
     current: checkCurrent('/dashboard'),
   },
