@@ -11,15 +11,37 @@ import {
 
 import { FundlLogo } from '../assets';
 
+function checkCurrent(page: string) {
+  if (document.location.pathname.includes(page)) {
+    return true;
+  }
+  return false;
+}
+
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
-  { name: 'Users', href: '/users', icon: UsersIcon, current: false },
-  { name: 'Shops', href: '/shops', icon: ShoppingCartIcon, current: false },
+  {
+    name: 'Dashboard',
+    href: '/',
+    icon: HomeIcon,
+    current: checkCurrent('/dashboard'),
+  },
+  {
+    name: 'Users',
+    href: '/users',
+    icon: UsersIcon,
+    current: checkCurrent('/users'),
+  },
+  {
+    name: 'Shops',
+    href: '/shops',
+    icon: ShoppingCartIcon,
+    current: checkCurrent('/shops'),
+  },
   {
     name: 'Discounts',
     href: '/discounts',
     icon: CreditCardIcon,
-    current: false,
+    current: checkCurrent('/discounts'),
   },
 ];
 
