@@ -9,7 +9,17 @@ import {
   XIcon,
 } from '@heroicons/react/outline';
 
+import { useQuery } from '@apollo/client';
+import { GET_USER } from '../api/graphql';
+
 import { FundlLogo } from '../assets';
+
+interface Page {
+  name: string;
+  href: string;
+  icon: any;
+  current: boolean;
+}
 
 function checkCurrent(page: string) {
   if (document.location.pathname.includes(page)) {
@@ -18,7 +28,7 @@ function checkCurrent(page: string) {
   return false;
 }
 
-const navigation = [
+const navigation: Array<Page> = [
   {
     name: 'Dashboard',
     href: '/dashboard',
@@ -51,6 +61,12 @@ function classNames(...classes: string[]) {
 
 export default function MainLayout(props: any) {
   const { children } = props;
+  const { data } = useQuery(GET_USER, {
+    variables: {
+      username: 'aiken',
+    },
+  });
+  console.log(data);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -211,8 +227,11 @@ export default function MainLayout(props: any) {
                     <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
                       Tom Cook
                     </p>
-                    <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                      View profile
+                    <p
+                      onClick={() => {}}
+                      className="text-xs font-medium text-gray-500 group-hover:text-gray-700"
+                    >
+                      Logout
                     </p>
                   </div>
                 </div>

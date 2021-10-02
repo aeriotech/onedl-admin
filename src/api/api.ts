@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 const url = process.env.API_URL ?? 'https://api.dev.fundl.io';
 

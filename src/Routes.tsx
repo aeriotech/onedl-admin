@@ -5,7 +5,7 @@ import { Home, Users, Shops, SignIn } from './pages';
 import API from './api/api';
 
 export default function Routes() {
-  const isAuthenticated = API.getToken();
+  const isAuthenticated: boolean = API.getToken() !== null;
 
   return (
     <Switch>

@@ -6,7 +6,7 @@ export default function ShopTable(props: ShopTableProps) {
   const { shops } = props;
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
       {shops.map((shop: any) => (
         <div
           key={shop.uuid}

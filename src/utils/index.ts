@@ -1,1 +1,1 @@
-export { default as checkAuth } from './Auth.util';
+export { default as logout } from './Logout.util';
