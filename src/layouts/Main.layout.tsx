@@ -11,6 +11,7 @@ import {
 
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../api/graphql';
+import { logout } from '../utils';
 
 import { FundlLogo } from '../assets';
 
@@ -61,12 +62,11 @@ function classNames(...classes: string[]) {
 
 export default function MainLayout(props: any) {
   const { children } = props;
-  const { data } = useQuery(GET_USER, {
+  const { client, data } = useQuery(GET_USER, {
     variables: {
       username: 'aiken',
     },
   });
-  console.log(data);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -163,8 +163,11 @@ export default function MainLayout(props: any) {
                       <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
                         Tom Cook
                       </p>
-                      <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
-                        View profile
+                      <p
+                        onClick={() => logout(client)}
+                        className="text-sm font-medium text-gray-500 group-hover:text-gray-700"
+                      >
+                        Logout
                       </p>
                     </div>
                   </div>
@@ -228,7 +231,7 @@ export default function MainLayout(props: any) {
                       Tom Cook
                     </p>
                     <p
-                      onClick={() => {}}
+                      onClick={() => logout(client)}
                       className="text-xs font-medium text-gray-500 group-hover:text-gray-700"
                     >
                       Logout

@@ -3,7 +3,7 @@ import { store } from 'react-notifications-component';
 import API from './api';
 
 export default class Auth {
-  static async login(username: string, password: string) {
+  static async login(username: string, password: string, history: any) {
     const response: any = await API.post('auth', {
       username,
       password,
@@ -24,6 +24,7 @@ export default class Auth {
         },
       });
       API.setToken(response.data.accessToken);
+      window.location.replace('/dashboard');
       return response;
     } else if (
       response.response.data.statusCode >= 400 &&

@@ -1,13 +1,13 @@
 interface UserTableProps {
-  people?: any;
+  users?: any;
 }
 
 export default function UserTable(props: UserTableProps) {
-  const { people } = props;
+  const { users } = props;
 
   return (
     <>
-      {!people || people.length === 0 ? (
+      {!users || users.length === 0 ? (
         <div className="py-4 ">
           <h1 className="text-2xl font-semibold text-gray-900">
             There are no users
@@ -50,34 +50,37 @@ export default function UserTable(props: UserTableProps) {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {people.map((person: any) => (
-                    <tr key={person.email}>
+                  {users.map((user: any) => (
+                    <tr key={user.email}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
                             <img
                               className="h-10 w-10 rounded-full"
-                              src={person.image}
+                              src={
+                                user.profile.profilePicture?.url ||
+                                'https://placekitten.com/g/40/40'
+                              }
                               alt=""
                             />
                           </div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">
-                              {person.name}
+                              {`${user.profile.firstName} ${user.profile.lastName}`}
                             </div>
                             <div className="text-sm text-gray-500">
-                              {person.email}
+                              {user.email}
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">
-                          {person.username}
+                          {user.username}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {person.emailVerified ? (
+                        {user.emailConfirmed ? (
                           <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                             Verified
                           </span>
@@ -88,7 +91,7 @@ export default function UserTable(props: UserTableProps) {
                         )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {person.ageVerified ? (
+                        {user.ageConfirmed ? (
                           <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                             Verified
                           </span>

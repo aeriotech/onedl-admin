@@ -9,12 +9,8 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
 
   async function onSubmit() {
-    const response: any = await Auth.login(username, password);
+    const response: any = await Auth.login(username, password, history);
     console.log(response);
-
-    if (response.status === 201) {
-      history.push('/dashboard');
-    }
   }
 
   return (
