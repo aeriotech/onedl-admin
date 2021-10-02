@@ -10,7 +10,7 @@ import {
 } from '@heroicons/react/outline';
 
 import { useQuery } from '@apollo/client';
-import { GET_USER } from '../api/graphql';
+import { GET_ME } from '../api/graphql';
 import { logout } from '../utils';
 
 import { FundlLogo } from '../assets';
@@ -62,11 +62,10 @@ function classNames(...classes: string[]) {
 
 export default function MainLayout(props: any) {
   const { children } = props;
-  const { client, data } = useQuery(GET_USER, {
-    variables: {
-      username: 'aiken',
-    },
-  });
+  const { data } = useQuery(GET_ME);
+  console.log(data);
+
+  const me = data?.me;
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -150,21 +149,24 @@ export default function MainLayout(props: any) {
                 </nav>
               </div>
               <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
-                <a href="#" className="flex-shrink-0 group block">
+                <a href="/profile" className="flex-shrink-0 group block">
                   <div className="flex items-center">
                     <div>
                       <img
                         className="inline-block h-10 w-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={
+                          me?.profile?.profilePicture?.url ||
+                          'https://placekitten.com/50/50'
+                        }
                         alt=""
                       />
                     </div>
                     <div className="ml-3">
                       <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                        Tom Cook
+                        {me?.profile?.firstName} {me?.profile?.lastName}
                       </p>
                       <p
-                        onClick={() => logout(client)}
+                        onClick={() => logout()}
                         className="text-sm font-medium text-gray-500 group-hover:text-gray-700"
                       >
                         Logout
@@ -217,21 +219,24 @@ export default function MainLayout(props: any) {
               </nav>
             </div>
             <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
-              <a href="#" className="flex-shrink-0 w-full group block">
+              <a href="/profile" className="flex-shrink-0 w-full group block">
                 <div className="flex items-center">
                   <div>
                     <img
                       className="inline-block h-9 w-9 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src={
+                        me?.profile?.profilePicture?.url ||
+                        'https://placekitten.com/50/50'
+                      }
                       alt=""
                     />
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                      Tom Cook
+                      {me?.profile?.firstName} {me?.profile?.lastName}
                     </p>
                     <p
-                      onClick={() => logout(client)}
+                      onClick={() => logout()}
                       className="text-xs font-medium text-gray-500 group-hover:text-gray-700"
                     >
                       Logout
@@ -247,7 +252,7 @@ export default function MainLayout(props: any) {
         <div className="md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">
           <button
             type="button"
-            className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+            className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500"
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>

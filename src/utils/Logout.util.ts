@@ -1,5 +1,4 @@
-export default async function logout(client: any) {
-  await client.resetStore();
+export default async function logout() {
   await localStorage.removeItem('token');
   window.location.replace('/');
 }

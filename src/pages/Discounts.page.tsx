@@ -1,31 +1,25 @@
-import { Seperator, UserTable } from '../components';
 import { useQuery } from '@apollo/client';
-import { GET_USERS } from '../api/graphql';
 import Loader from 'react-spinners/RingLoader';
+import { GET_DISCOUNTS } from '../api/graphql';
+import { DiscountsTable, Seperator } from '../components';
 
-interface User {
-  username: string;
-  email: string;
-  profile: {
-    firstName: string;
-    lastName: string;
-    profilePicture: {
-      url: string;
-    };
+interface Discount {
+  uuid: string;
+  name: string;
+  description: string;
+  shop: {
+    name: string;
   };
-  emailConfirmed: boolean;
-  ageConfirmed: boolean;
 }
 
-export default function Home() {
-  const { loading, error, data } = useQuery(GET_USERS);
-  console.log(data);
+export default function Discounts() {
+  const { loading, error, data } = useQuery(GET_DISCOUNTS);
 
   if (loading)
     return (
       <div className="py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <h1 className="text-2xl font-semibold text-gray-900">Users</h1>
+          <h1 className="text-2xl font-semibold text-gray-900">Discounts</h1>
         </div>
         <Seperator height="20px" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -41,7 +35,7 @@ export default function Home() {
     return (
       <div className="py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <h1 className="text-2xl font-semibold text-gray-900">Users</h1>
+          <h1 className="text-2xl font-semibold text-gray-900">Discounts</h1>
         </div>
         <Seperator height="20px" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -54,7 +48,7 @@ export default function Home() {
       </div>
     );
 
-  const users: Array<User> = data !== undefined ? data.users : [];
+  const discounts: Array<Discount> = data !== undefined ? data.discounts : [];
 
   return (
     <div className="py-6">
@@ -63,7 +57,7 @@ export default function Home() {
       </div>
       <Seperator height="20px" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <UserTable users={users} />
+        <DiscountsTable discounts={discounts} />
       </div>
     </div>
   );

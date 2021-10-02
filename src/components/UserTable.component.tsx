@@ -59,7 +59,7 @@ export default function UserTable(props: UserTableProps) {
                               className="h-10 w-10 rounded-full"
                               src={
                                 user.profile.profilePicture?.url ||
-                                'https://placekitten.com/g/40/40'
+                                'https://cataas.com/cat'
                               }
                               alt=""
                             />
@@ -104,7 +104,7 @@ export default function UserTable(props: UserTableProps) {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <a
                           href="#"
-                          className="text-indigo-600 hover:text-indigo-900"
+                          className="text-yellow-500 hover:text-yellow-400"
                         >
                           Edit
                         </a>
