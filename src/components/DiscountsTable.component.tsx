@@ -57,10 +57,11 @@ export default function DiscountsTable(props: DiscountsTableProps) {
                     </tr>
                   </thead>
                   <tbody>
-                    {discounts.map((discount: any, id: number) => (
+                    {discounts.map((discount: any) => (
                       <tr
+                        onClick={() => console.log(`Clicked ${discount.name}`)}
                         key={discount.uuid}
-                        className={id % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
+                        className="disable-select bg-white pointer hover:bg-gray-100"
                       >
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {discount.name}

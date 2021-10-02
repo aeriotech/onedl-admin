@@ -48,7 +48,11 @@ export default function UserTable(props: UserTableProps) {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {users.map((user: any) => (
-                    <tr key={user.email}>
+                    <tr
+                      onClick={() => console.log(`Clicked ${user.username}`)}
+                      key={user.email}
+                      className="disable-select pointer hover:bg-gray-100"
+                    >
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
@@ -56,7 +60,7 @@ export default function UserTable(props: UserTableProps) {
                               className="h-10 w-10 rounded-full"
                               src={
                                 user.profile.profilePicture?.url ||
-                                'https://cataas.com/cat'
+                                'https://placekitten.com/40/40'
                               }
                               alt=""
                             />
