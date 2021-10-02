@@ -54,9 +54,6 @@ export default function DiscountsTable(props: DiscountsTableProps) {
                       >
                         Shop
                       </th>
-                      <th scope="col" className="relative px-6 py-3">
-                        <span className="sr-only">Edit</span>
-                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -73,14 +70,6 @@ export default function DiscountsTable(props: DiscountsTableProps) {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {discount.shop.name}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <a
-                            href="#"
-                            className="text-yellow-500 hover:text-yellow-400"
-                          >
-                            Edit
-                          </a>
                         </td>
                       </tr>
                     ))}

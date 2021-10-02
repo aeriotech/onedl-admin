@@ -44,9 +44,6 @@ export default function UserTable(props: UserTableProps) {
                     >
                       Age status
                     </th>
-                    <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Edit</span>
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -100,14 +97,6 @@ export default function UserTable(props: UserTableProps) {
                             Unverified
                           </span>
                         )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a
-                          href="#"
-                          className="text-yellow-500 hover:text-yellow-400"
-                        >
-                          Edit
-                        </a>
                       </td>
                     </tr>
                   ))}
