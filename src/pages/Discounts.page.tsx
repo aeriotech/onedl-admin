@@ -6,7 +6,6 @@ import { DiscountsTable, Seperator } from '../components';
 interface Discount {
   uuid: string;
   name: string;
-  description: string;
   shop: {
     name: string;
   };

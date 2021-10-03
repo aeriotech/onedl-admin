@@ -2,6 +2,15 @@ interface DiscountsTableProps {
   discounts?: any;
 }
 
+interface Discount {
+  uuid: string;
+  name: string;
+  description: string;
+  shop: {
+    name: string;
+  };
+}
+
 export default function DiscountsTable(props: DiscountsTableProps) {
   const { discounts } = props;
 
@@ -14,56 +23,27 @@ export default function DiscountsTable(props: DiscountsTableProps) {
           </h1>
         </div>
       ) : (
-        <div className="flex flex-col">
-          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-              <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                      >
-                        Name
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                      >
-                        Description
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                      >
-                        Shop
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {discounts.map((discount: any) => (
-                      <tr
-                        onClick={() => console.log(`Clicked ${discount.name}`)}
-                        key={discount.uuid}
-                        className="disable-select bg-white pointer hover:bg-gray-100"
-                      >
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          {discount.name}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {discount.description}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {discount.shop.name}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+        <div>
+          <ul className="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {discounts.map((discount: Discount) => (
+              <li
+                key={discount.name}
+                className="col-span-1 flex shadow-sm rounded-md"
+              >
+                <div className="bg-yellow-500 flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md">
+                  DSC
+                </div>
+                <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+                  <div className="flex-1 px-4 py-2 text-sm truncate">
+                    <p className="text-gray-900 font-medium hover:text-gray-600">
+                      {discount.name}
+                    </p>
+                    <p className="text-gray-500">{discount.shop.name}</p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </>

@@ -5,7 +5,6 @@ const GET_DISCOUNTS = gql`
     discounts {
       uuid
       name
-      description
       shop {
         name
       }
