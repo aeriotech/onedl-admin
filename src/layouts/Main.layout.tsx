@@ -7,6 +7,7 @@ import {
   MenuIcon,
   UsersIcon,
   XIcon,
+  PhotographIcon,
 } from '@heroicons/react/outline';
 
 import { useQuery } from '@apollo/client';
@@ -53,6 +54,12 @@ const navigation: Array<Page> = [
     href: '/discounts',
     icon: CreditCardIcon,
     current: checkCurrent('/discounts'),
+  },
+  {
+    name: 'Media',
+    href: '/media',
+    icon: PhotographIcon,
+    current: checkCurrent('/media'),
   },
 ];
 

@@ -27,3 +27,9 @@ code {
 .pointer {
   cursor: pointer;
 }
+
+.media-file {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
