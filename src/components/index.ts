@@ -4,3 +4,4 @@ export { default as Seperator } from './Seperator.component';
 export { default as ShopTable } from './ShopTable.component';
 export { default as DiscountsTable } from './DiscountsTable.component';
 export { default as MediaTable } from './MediaTable.component';
+export { default as UserForm } from './UserForm.component';

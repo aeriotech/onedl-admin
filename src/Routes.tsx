@@ -1,7 +1,7 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { RouteWithLayout } from './components';
 import { Main } from './layouts';
-import { Home, Users, Shops, SignIn, Discounts, Media } from './pages';
+import { Home, Users, Shops, SignIn, Discounts, Media, User } from './pages';
 import API from './api/api';
 
 export default function Routes() {
@@ -22,6 +22,13 @@ export default function Routes() {
         exact
         layout={Main}
         path="/users"
+        isAuthenticated={isAuthenticated}
+      />
+      <RouteWithLayout
+        component={User}
+        exact
+        layout={Main}
+        path="/user/:username"
         isAuthenticated={isAuthenticated}
       />
       <RouteWithLayout

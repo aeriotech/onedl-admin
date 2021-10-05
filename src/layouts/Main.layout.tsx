@@ -70,7 +70,6 @@ function classNames(...classes: string[]) {
 export default function MainLayout(props: any) {
   const { children } = props;
   const { data } = useQuery(GET_ME);
-  console.log(data);
 
   const me = data?.me;
 

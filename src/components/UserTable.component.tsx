@@ -1,9 +1,12 @@
+import { useHistory } from 'react-router-dom';
+
 interface UserTableProps {
   users?: any;
 }
 
 export default function UserTable(props: UserTableProps) {
   const { users } = props;
+  const history = useHistory();
 
   return (
     <>
@@ -49,7 +52,7 @@ export default function UserTable(props: UserTableProps) {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {users.map((user: any) => (
                     <tr
-                      onClick={() => console.log(`Clicked ${user.username}`)}
+                      onClick={() => history.push(`/user/${user.username}`)}
                       key={user.email}
                       className="disable-select pointer hover:bg-gray-100"
                     >

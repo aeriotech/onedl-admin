@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -9,9 +8,10 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import API from './api/api';
 
 const httpLink = createHttpLink({
-  uri: 'https://api.dev.fundl.io/graphql',
+  uri: `${API.url}/graphql`,
 });
 
 const authLink = setContext((_, { headers }) => {

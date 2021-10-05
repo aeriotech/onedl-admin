@@ -12,6 +12,7 @@ const GET_USER = gql`
         profilePicture {
           url
         }
+        bio
       }
       emailConfirmed
       ageConfirmed

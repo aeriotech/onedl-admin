@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const url = process.env.API_URL ?? 'https://api.dev.fundl.io';
-
 export default class API {
+  static url = process.env.API_URL ?? 'https://api.dev.fundl.io';
+
   static getToken() {
     return localStorage.getItem('token');
   }
@@ -19,7 +19,7 @@ export default class API {
     const token = API.getToken();
 
     const response = await axios
-      .get(`${url}/${endpoint}`, {
+      .get(`${API.url}/${endpoint}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       })
       .catch((error) => {
@@ -35,7 +35,7 @@ export default class API {
     const token = API.getToken();
 
     const response = await axios
-      .post(`${url}/${endpoint}`, data, {
+      .post(`${API.url}/${endpoint}`, data, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       })
       .catch((error) => {
@@ -49,7 +49,7 @@ export default class API {
     const token = API.getToken();
 
     const response = await axios
-      .put(`${url}/${endpoint}`, data, {
+      .put(`${API.url}/${endpoint}`, data, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       })
       .catch((error) => {
@@ -65,7 +65,7 @@ export default class API {
     const token = API.getToken();
 
     const response = await axios
-      .delete(`${url}/${endpoint}`, {
+      .delete(`${API.url}/${endpoint}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       })
       .catch((error) => {
