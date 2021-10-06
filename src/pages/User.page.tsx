@@ -4,24 +4,6 @@ import Loader from 'react-spinners/RingLoader';
 import { GET_USER } from '../api/graphql';
 import { Seperator, UserForm } from '../components';
 
-interface User {
-  role: string;
-  username: string;
-  email: string;
-  profile: {
-    firstName: string;
-    lastName: string;
-    profilePicture: {
-      url: string;
-    };
-  };
-  emailConfirmed: boolean;
-  ageConfirmed: boolean;
-  score: number;
-  createdAt: any;
-  updatedAt: any;
-}
-
 export default function UserView() {
   const { username }: any = useParams();
   const { loading, error, data } = useQuery(GET_USER, {
@@ -30,7 +12,7 @@ export default function UserView() {
     },
   });
 
-  const user: User = data?.user;
+  const user: any = data?.user;
 
   if (loading)
     return (

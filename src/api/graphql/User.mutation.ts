@@ -1,7 +1,11 @@
 import { gql } from '@apollo/client';
 
 const EDIT_USER = gql`
-  mutation User($username: String!, $email: String!, $usernameNew: String!) {
+  mutation UpdateUser(
+    $username: String!
+    $email: String!
+    $usernameNew: String!
+  ) {
     updateUser(
       data: { username: $usernameNew, email: $email }
       where: { username: $username }

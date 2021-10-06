@@ -3,20 +3,6 @@ import { useQuery } from '@apollo/client';
 import { GET_USERS } from '../api/graphql';
 import Loader from 'react-spinners/RingLoader';
 
-interface User {
-  username: string;
-  email: string;
-  profile: {
-    firstName: string;
-    lastName: string;
-    profilePicture: {
-      url: string;
-    };
-  };
-  emailConfirmed: boolean;
-  ageConfirmed: boolean;
-}
-
 export default function Home() {
   const { loading, error, data } = useQuery(GET_USERS);
   console.log(data);
@@ -54,7 +40,7 @@ export default function Home() {
       </div>
     );
 
-  const users: Array<User> = data !== undefined ? data.users : [];
+  const users: Array<any> = data !== undefined ? data.users : [];
 
   return (
     <div className="py-6">
