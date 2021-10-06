@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Loader from 'react-spinners/RingLoader';
 import { GET_USER } from '../api/graphql';
 import { Seperator, UserForm } from '../components';
@@ -23,7 +23,6 @@ interface User {
 }
 
 export default function UserView() {
-  const history = useHistory();
   const { username }: any = useParams();
   const { loading, error, data } = useQuery(GET_USER, {
     variables: {

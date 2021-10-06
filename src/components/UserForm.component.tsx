@@ -4,31 +4,12 @@ import { EDIT_USER } from '../api/graphql';
 import { Seperator } from '.';
 import { useHistory } from 'react-router-dom';
 
-interface User {
-  role: string;
-  username: string;
-  email: string;
-  profile: {
-    firstName: string;
-    lastName: string;
-    profilePicture: {
-      url: string;
-    };
-    bio: string;
-  };
-  emailConfirmed: boolean;
-  ageConfirmed: boolean;
-  score: number;
-  createdAt: any;
-  updatedAt: any;
-}
-
 interface UserFormProps {
   user: any;
 }
 
 export default function UserForm(props: UserFormProps) {
-  const [updateUser, { data, loading, error }] = useMutation(EDIT_USER);
+  const [updateUser, { loading, error }] = useMutation(EDIT_USER);
   const history = useHistory();
 
   const { user } = props;
@@ -86,6 +67,7 @@ export default function UserForm(props: UserFormProps) {
                   user?.profile.profilePicture?.url ||
                   'https://placekitten.com/1500/1500'
                 }
+                alt="Profile pic"
               />
             </span>
           </div>
@@ -180,6 +162,7 @@ export default function UserForm(props: UserFormProps) {
                 },
               });
               history.push(`/user/${userData.username}`);
+              window.location.reload();
             }}
             type="submit"
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-300"
