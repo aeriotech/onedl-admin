@@ -8,5 +8,4 @@ export { default as GET_SHOPS } from './Shops.query';
 
 // Mutations
 export { default as EDIT_USER } from './User.mutation';
-export { EDIT_PROFILE as EDIT_PROFILE } from './Profile.mutation';
-export { DELETE_PFP as DELETE_PFP } from './Profile.mutation';
+export { EDIT_PROFILE, DELETE_PFP } from './Profile.mutation';

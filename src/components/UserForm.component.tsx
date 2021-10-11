@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { EDIT_USER, EDIT_PROFILE, DELETE_PFP } from '../api/graphql';
+import { EDIT_USER, EDIT_PROFILE /*DELETE_PFP*/ } from '../api/graphql';
 import { Seperator } from '.';
 import { useHistory } from 'react-router-dom';
 import { TrashIcon } from '@heroicons/react/solid';
@@ -14,8 +14,8 @@ export default function UserForm(props: UserFormProps) {
   const [updateUser, { loading, error }] = useMutation(EDIT_USER);
   const [updateProfile, { loading: loadingProfile, error: errorProfile }] =
     useMutation(EDIT_PROFILE);
-  const [deletePfp, { loading: loadingPfp, error: errorPfp }] =
-    useMutation(DELETE_PFP);
+  // const [deletePfp, { loading: loadingPfp, error: errorPfp }] =
+  //   useMutation(DELETE_PFP);
 
   const history = useHistory();
 
@@ -36,13 +36,13 @@ export default function UserForm(props: UserFormProps) {
       email: user?.email || 'someone@email.com',
       username: user?.username || 'someone',
     });
-  }, [loading, loadingProfile, loadingPfp, user]);
+  }, [loading, loadingProfile, user]);
 
   const handleChange = (e: any) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  if (loading || loadingProfile || loadingPfp)
+  if (loading || loadingProfile)
     return (
       <div className="py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -56,7 +56,7 @@ export default function UserForm(props: UserFormProps) {
         </div>
       </div>
     );
-  if (error || errorProfile || errorPfp)
+  if (error || errorProfile)
     return (
       <div className="py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -66,8 +66,7 @@ export default function UserForm(props: UserFormProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex items-center justify-center border-4 border-dashed border-gray-200 rounded-lg h-96">
             <h1 className="text-2xl font-semibold text-gray-900">
-              Submission error! $
-              {error?.message || errorProfile?.message || errorPfp?.message}`
+              Submission error! ${error?.message || errorProfile?.message}`
             </h1>
           </div>
         </div>
