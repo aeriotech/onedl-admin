@@ -8,19 +8,19 @@
 // ====================================================
 
 export interface Users_users_profile_profilePicture {
-  __typename: "PublicFile";
+  __typename: 'PublicFile';
   url: string;
 }
 
 export interface Users_users_profile {
-  __typename: "Profile";
+  __typename: 'Profile';
   firstName: string;
   lastName: string;
   profilePicture: Users_users_profile_profilePicture | null;
 }
 
 export interface Users_users {
-  __typename: "User";
+  __typename: 'User';
   username: string;
   email: string;
   profile: Users_users_profile;

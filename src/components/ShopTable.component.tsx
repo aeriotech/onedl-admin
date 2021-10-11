@@ -13,7 +13,7 @@ export default function ShopTable(props: ShopTableProps) {
         <div
           onClick={() => console.log(`Clicked ${shop.name}`)}
           key={shop.uuid}
-          className="pointer relative border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 hover:bg-gray-100"
+          className="pointer relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 hover:bg-gray-100"
         >
           <div className="flex-shrink-0">
             <img
