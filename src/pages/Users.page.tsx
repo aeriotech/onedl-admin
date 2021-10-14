@@ -5,7 +5,6 @@ import Loader from 'react-spinners/RingLoader';
 
 export default function Home() {
   const { loading, error, data } = useQuery(GET_USERS);
-  console.log(data);
 
   if (loading)
     return (

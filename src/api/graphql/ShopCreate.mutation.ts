@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const EDIT_USER = gql`
+const CREATE_SHOP = gql`
   mutation CreateShop($uuid: String!, $name: String!) {
     createShop(data: { uuid: $uuid, name: $name }) {
       id
@@ -10,4 +10,4 @@ const EDIT_USER = gql`
   }
 `;
 
-export default EDIT_USER;
+export default CREATE_SHOP;
