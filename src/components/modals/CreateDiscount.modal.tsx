@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import { GET_SHOPS } from '../../api/graphql';
-import { useMutation, useQuery } from '@apollo/client';
+import { /*useMutation,*/ useQuery } from '@apollo/client';
 import { store } from 'react-notifications-component';
 
 interface SlideOverProps {

@@ -165,7 +165,6 @@ export default function SlideOver(props: SlideOverProps) {
                                         onChange={handleFileChange}
                                       />
                                     </label>
-                                    <p className="pl-1">or drag and drop</p>
                                   </div>
                                   <p className="text-xs text-gray-500">
                                     PNG, JPG, GIF

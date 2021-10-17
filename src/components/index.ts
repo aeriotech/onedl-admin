@@ -8,3 +8,4 @@ export { default as UserForm } from './UserForm.component';
 export { default as CreateShop } from './modals/CreateShop.modal';
 export { default as CreateFile } from './modals/CreateFile.modal';
 export { default as CreateDiscount } from './modals/CreateDiscount.modal';
+export { default as WarningModal } from './modals/Warning.modal';

@@ -1,4 +1,8 @@
 import { ReactSVG } from 'react-svg';
+import { TrashIcon } from '@heroicons/react/outline';
+import { Seperator, WarningModal } from '.';
+import API from '../api/api';
+import { useState } from 'react';
 
 interface MediaTableProps {
   media?: any;
@@ -14,9 +18,25 @@ interface File {
 
 export default function MediaTable(props: MediaTableProps) {
   const { media } = props;
+  const [open, setOpen] = useState(false);
+
+  const [id, setID] = useState(0);
+
+  async function deleteImage() {
+    await API.delete(`/files/${id}`);
+    window.location.reload();
+  }
 
   return (
     <>
+      <WarningModal
+        isOpen={open}
+        setOpen={setOpen}
+        title="Delete media"
+        content={`Are you sure you want to delete the image with the ID of ${id}?`}
+        buttonText="Delete"
+        onClick={deleteImage}
+      />
       {!media || media.length === 0 ? (
         <div className="py-4 ">
           <h1 className="text-2xl font-semibold text-gray-900">
@@ -41,23 +61,30 @@ export default function MediaTable(props: MediaTableProps) {
                     className="media-file object-cover pointer-events-none group-hover:opacity-75"
                   />
                 )}
-                <button
-                  type="button"
-                  className="absolute inset-0 focus:outline-none"
-                >
-                  <span className="sr-only">View details for {file.id}</span>
-                </button>
               </div>
-              <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">
-                {file.id}
-              </p>
-              <p className="block text-sm font-medium text-gray-500 pointer-events-none">
-                {new Date(file.createdAt).toLocaleDateString('si', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </p>
+              <div className="flex">
+                <div className="direction-column">
+                  <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">
+                    {file.id}
+                  </p>
+                  <p className="block text-sm font-medium text-gray-500 pointer-events-none">
+                    {new Date(file.createdAt).toLocaleDateString('si', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </p>
+                </div>
+                <Seperator width="120px" />
+                <TrashIcon
+                  className="text-red-500 pointer self-end justify-self-center h-6 w-6"
+                  aria-hidden="true"
+                  onClick={() => {
+                    setID(file.id);
+                    setOpen(true);
+                  }}
+                />
+              </div>
             </li>
           ))}
         </ul>
