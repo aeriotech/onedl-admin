@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default class API {
-  static url = process.env.API_URL ?? 'https://api.dev.fundl.io';
+  static url = process.env.REACT_APP_API_URL ?? 'https://api.dev.fundl.io';
 
   static getToken() {
     return localStorage.getItem('token');
