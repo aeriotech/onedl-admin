@@ -3,8 +3,8 @@ import { store } from 'react-notifications-component';
 import API from './api';
 
 export default class Auth {
-  static async login(username: string, password: string, history: any) {
-    const response: any = await API.post('auth', {
+  static async login(username: string, password: string) {
+    const response: any = await API.post('/auth', {
       username,
       password,
     });

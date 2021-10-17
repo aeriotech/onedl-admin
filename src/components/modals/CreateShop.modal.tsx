@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
-import { CREATE_SHOP } from '../api/graphql';
+import { CREATE_SHOP } from '../../api/graphql';
 import { useMutation } from '@apollo/client';
 import { store } from 'react-notifications-component';
 

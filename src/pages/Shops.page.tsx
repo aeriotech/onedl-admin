@@ -1,4 +1,4 @@
-import { Seperator, ShopTable, SlideOver } from '../components';
+import { Seperator, ShopTable, CreateShop } from '../components';
 import { GET_SHOPS } from '../api/graphql';
 import { Shops_shops } from '../api/graphql/__generated__/Shops';
 import { useQuery } from '@apollo/client';
@@ -47,7 +47,7 @@ export default function Shops() {
 
   return (
     <div className="py-6">
-      <SlideOver isOpen={open} onClose={setOpen} setOpen={setOpen} />
+      <CreateShop isOpen={open} onClose={setOpen} setOpen={setOpen} />
       <div className="flex grid grid-rows-1 gap-4 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <h1 className="text-2xl font-semibold text-gray-900">Shops</h1>
         <span className="sm:ml-3">

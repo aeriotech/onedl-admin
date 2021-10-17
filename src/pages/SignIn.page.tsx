@@ -1,15 +1,13 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { FundlLogo } from '../assets';
 import Auth from '../api/Auth.api';
 
 export default function SignIn() {
-  const history = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   async function onSubmit() {
-    const response: any = await Auth.login(username, password, history);
+    const response: any = await Auth.login(username, password);
     console.log(response);
   }
 

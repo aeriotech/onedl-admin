@@ -45,14 +45,14 @@ export default function MediaTable(props: MediaTableProps) {
                   type="button"
                   className="absolute inset-0 focus:outline-none"
                 >
-                  <span className="sr-only">View details for {file.key}</span>
+                  <span className="sr-only">View details for {file.id}</span>
                 </button>
               </div>
               <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">
-                {file.key}
+                {file.id}
               </p>
               <p className="block text-sm font-medium text-gray-500 pointer-events-none">
-                {new Date(file.createdAt).toLocaleDateString('si-sl', {
+                {new Date(file.createdAt).toLocaleDateString('si', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',

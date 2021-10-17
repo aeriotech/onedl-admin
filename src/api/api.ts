@@ -19,7 +19,7 @@ export default class API {
     const token = API.getToken();
 
     const response = await axios
-      .get(`${API.url}/${endpoint}`, {
+      .get(`${API.url}${endpoint}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       })
       .catch((error) => {
@@ -35,8 +35,27 @@ export default class API {
     const token = API.getToken();
 
     const response = await axios
-      .post(`${API.url}/${endpoint}`, data, {
+      .post(`${API.url}${endpoint}`, data, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
+      })
+      .catch((error) => {
+        return error;
+      });
+
+    return response;
+  }
+
+  static async upload(endpoint: string, data: Object) {
+    const token = API.getToken();
+
+    const response = await axios
+      .post(`${API.url}${endpoint}`, data, {
+        headers: token
+          ? {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data',
+            }
+          : {},
       })
       .catch((error) => {
         return error;
@@ -49,7 +68,7 @@ export default class API {
     const token = API.getToken();
 
     const response = await axios
-      .put(`${API.url}/${endpoint}`, data, {
+      .put(`${API.url}${endpoint}`, data, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       })
       .catch((error) => {
@@ -65,7 +84,7 @@ export default class API {
     const token = API.getToken();
 
     const response = await axios
-      .delete(`${API.url}/${endpoint}`, {
+      .delete(`${API.url}${endpoint}`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       })
       .catch((error) => {
