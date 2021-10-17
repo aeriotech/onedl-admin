@@ -8,6 +8,9 @@ const GET_DISCOUNTS = gql`
       shop {
         name
       }
+      thumbnail {
+        url
+      }
     }
   }
 `;

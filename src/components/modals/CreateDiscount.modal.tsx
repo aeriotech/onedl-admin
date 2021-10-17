@@ -1,8 +1,8 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
-import { CREATE_SHOP } from '../../api/graphql';
-import { useMutation } from '@apollo/client';
+import { GET_SHOPS } from '../../api/graphql';
+import { useMutation, useQuery } from '@apollo/client';
 import { store } from 'react-notifications-component';
 
 interface SlideOverProps {
@@ -12,33 +12,23 @@ interface SlideOverProps {
 }
 
 export default function SlideOver(props: SlideOverProps) {
-  const [createShop, { error }] = useMutation(CREATE_SHOP);
+  const { data: shopsData } = useQuery(GET_SHOPS);
 
   const { isOpen, onClose, setOpen } = props;
   const [data, setData] = useState({
     name: '',
+    description: '',
     uuid: '',
+    shopId: 0,
+    max: 1,
+    parts: 1,
   });
 
   const handleChange = (e: any) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  if (error) {
-    store.addNotification({
-      title: 'Error',
-      message: error.message,
-      type: 'danger',
-      insert: 'top',
-      container: 'top-right',
-      animationIn: ['animated', 'fadeIn'],
-      animationOut: ['animated', 'fadeOut'],
-      dismiss: {
-        duration: 5000,
-        onScreen: true,
-      },
-    });
-  }
+  const shops: Array<any> = shopsData !== undefined ? shopsData.shops : [];
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -66,7 +56,7 @@ export default function SlideOver(props: SlideOverProps) {
                     <div className="py-6 px-4 bg-yellow-400 sm:px-6">
                       <div className="flex items-center justify-between">
                         <Dialog.Title className="text-lg font-medium text-white">
-                          New Shop
+                          New Discount
                         </Dialog.Title>
                         <div className="ml-3 h-7 flex items-center">
                           <button
@@ -88,7 +78,7 @@ export default function SlideOver(props: SlideOverProps) {
                               htmlFor="name"
                               className="block text-sm font-medium text-gray-900"
                             >
-                              Shop name
+                              Name
                             </label>
                             <div className="mt-1">
                               <input
@@ -103,10 +93,10 @@ export default function SlideOver(props: SlideOverProps) {
                           </div>
                           <div>
                             <label
-                              htmlFor="uuid"
+                              htmlFor="name"
                               className="block text-sm font-medium text-gray-900"
                             >
-                              Shop UUID (e.g. wolt, mcdonalds, harvey-norman...)
+                              UUID (e.g. wolt-delivery, mcfundl)
                             </label>
                             <div className="mt-1">
                               <input
@@ -117,6 +107,54 @@ export default function SlideOver(props: SlideOverProps) {
                                 onChange={handleChange}
                                 className="block w-full shadow-sm sm:text-sm focus:ring-yellow-300 focus:border-yellow-400 border-gray-300 rounded-md"
                               />
+                            </div>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="uuid"
+                              className="block text-sm font-medium text-gray-900"
+                            >
+                              Description
+                            </label>
+                            <div className="mt-1">
+                              <textarea
+                                name="description"
+                                id="description"
+                                rows={3}
+                                value={data.description}
+                                onChange={handleChange}
+                                className="block w-full shadow-sm sm:text-sm focus:ring-yellow-300 focus:border-yellow-400 border-gray-300 rounded-md"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="name"
+                              className="block text-sm font-medium text-gray-900"
+                            >
+                              Shop
+                            </label>
+                            <div className="mt-1">
+                              {shops !== null && shops.length !== 0 ? (
+                                <select
+                                  name="shopId"
+                                  id="shopId"
+                                  value={data.shopId}
+                                  onChange={handleChange}
+                                  className="text-grey-700 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-300 focus:border-yellow-300 sm:text-sm"
+                                >
+                                  {shops?.map((shop: any) => (
+                                    <option key={shop.id} value={shop.id}>
+                                      {shop.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              ) : (
+                                <p>
+                                  No shops available.{' '}
+                                  <a href="/shops">Create one here</a>
+                                </p>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -135,16 +173,10 @@ export default function SlideOver(props: SlideOverProps) {
                       onClick={() => {
                         setOpen(false);
                         console.log(data);
-                        createShop({
-                          variables: {
-                            name: data.name,
-                            uuid: data.uuid,
-                          },
-                        });
                         store.addNotification({
-                          title: 'Success',
-                          message: 'Successfully created shop!',
-                          type: 'success',
+                          title: 'Sorry :(',
+                          message: 'This feature is currently in development',
+                          type: 'warning',
                           insert: 'top',
                           container: 'top-right',
                           animationIn: ['animated', 'fadeIn'],
@@ -154,7 +186,7 @@ export default function SlideOver(props: SlideOverProps) {
                             onScreen: true,
                           },
                         });
-                        window.location.reload();
+                        // window.location.reload();
                       }}
                       className="ml-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                     >

@@ -9,6 +9,9 @@ interface Discount {
   shop: {
     name: string;
   };
+  thumbnail: {
+    url: string;
+  };
 }
 
 export default function DiscountsTable(props: DiscountsTableProps) {
@@ -30,9 +33,16 @@ export default function DiscountsTable(props: DiscountsTableProps) {
                 key={discount.name}
                 className="disable-select pointer hover:bg-gray-100 col-span-1 flex shadow-sm rounded-md"
               >
-                <div className="bg-yellow-500 flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md">
-                  DSC
-                </div>
+                {discount.thumbnail !== undefined ||
+                discount.thumbnail !== null ? (
+                  <div className="flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md">
+                    <img src={discount.thumbnail.url} alt="Discount" />
+                  </div>
+                ) : (
+                  <div className="bg-yellow-500 flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md">
+                    DSC
+                  </div>
+                )}
                 <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
                   <div className="flex-1 px-4 py-2 text-sm truncate">
                     <p className="text-gray-900 font-medium">{discount.name}</p>
