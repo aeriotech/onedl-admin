@@ -1,8 +1,8 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
-import { GET_SHOPS } from '../../api/graphql';
-import { /*useMutation,*/ useQuery } from '@apollo/client';
+import { GET_SHOPS, CREATE_DISCOUNT } from '../../api/graphql';
+import { useMutation, useQuery } from '@apollo/client';
 import { store } from 'react-notifications-component';
 
 interface SlideOverProps {
@@ -13,15 +13,15 @@ interface SlideOverProps {
 
 export default function SlideOver(props: SlideOverProps) {
   const { data: shopsData } = useQuery(GET_SHOPS);
+  const [createDiscount, { error }] = useMutation(CREATE_DISCOUNT);
 
   const { isOpen, onClose, setOpen } = props;
   const [data, setData] = useState({
     name: '',
     description: '',
-    uuid: '',
-    shopId: 0,
-    max: 1,
-    parts: 1,
+    shopId: '',
+    imageId: '',
+    thumbnailId: '',
   });
 
   const handleChange = (e: any) => {
@@ -29,6 +29,22 @@ export default function SlideOver(props: SlideOverProps) {
   };
 
   const shops: Array<any> = shopsData !== undefined ? shopsData.shops : [];
+
+  if (error) {
+    store.addNotification({
+      title: 'Error',
+      message: error.message,
+      type: 'danger',
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animated', 'fadeIn'],
+      animationOut: ['animated', 'fadeOut'],
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
+  }
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -93,24 +109,6 @@ export default function SlideOver(props: SlideOverProps) {
                           </div>
                           <div>
                             <label
-                              htmlFor="name"
-                              className="block text-sm font-medium text-gray-900"
-                            >
-                              UUID (e.g. wolt-delivery, mcfundl)
-                            </label>
-                            <div className="mt-1">
-                              <input
-                                type="text"
-                                name="uuid"
-                                id="uuid"
-                                value={data.uuid}
-                                onChange={handleChange}
-                                className="block w-full shadow-sm sm:text-sm focus:ring-yellow-300 focus:border-yellow-400 border-gray-300 rounded-md"
-                              />
-                            </div>
-                          </div>
-                          <div>
-                            <label
                               htmlFor="uuid"
                               className="block text-sm font-medium text-gray-900"
                             >
@@ -122,6 +120,42 @@ export default function SlideOver(props: SlideOverProps) {
                                 id="description"
                                 rows={3}
                                 value={data.description}
+                                onChange={handleChange}
+                                className="block w-full shadow-sm sm:text-sm focus:ring-yellow-300 focus:border-yellow-400 border-gray-300 rounded-md"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="name"
+                              className="block text-sm font-medium text-gray-900"
+                            >
+                              Image ID (number)
+                            </label>
+                            <div className="mt-1">
+                              <input
+                                type="text"
+                                name="imageId"
+                                id="imageId"
+                                value={data.imageId}
+                                onChange={handleChange}
+                                className="block w-full shadow-sm sm:text-sm focus:ring-yellow-300 focus:border-yellow-400 border-gray-300 rounded-md"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="name"
+                              className="block text-sm font-medium text-gray-900"
+                            >
+                              Thumbnail ID (number)
+                            </label>
+                            <div className="mt-1">
+                              <input
+                                type="text"
+                                name="thumbnailId"
+                                id="thumbnailId"
+                                value={data.thumbnailId}
                                 onChange={handleChange}
                                 className="block w-full shadow-sm sm:text-sm focus:ring-yellow-300 focus:border-yellow-400 border-gray-300 rounded-md"
                               />
@@ -171,12 +205,24 @@ export default function SlideOver(props: SlideOverProps) {
                     </button>
                     <button
                       onClick={() => {
+                        let shopId = parseInt(data.shopId);
+                        let imageId = parseInt(data.imageId);
+                        let thumbnailId = parseInt(data.thumbnailId);
                         setOpen(false);
                         console.log(data);
+                        createDiscount({
+                          variables: {
+                            name: data.name,
+                            description: data.description,
+                            shopId: shopId,
+                            imageId: imageId,
+                            thumbnailId: thumbnailId,
+                          },
+                        });
                         store.addNotification({
-                          title: 'Sorry :(',
-                          message: 'This feature is currently in development',
-                          type: 'warning',
+                          title: 'Success',
+                          message: 'Successfully created discount!',
+                          type: 'success',
                           insert: 'top',
                           container: 'top-right',
                           animationIn: ['animated', 'fadeIn'],
